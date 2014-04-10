@@ -39,6 +39,8 @@ private:
     UrgUsbCom urg_usb;
     UrgDevice urg;
     
+    TcpipSocket socket;
+    
     Lock urg_mutex;
     
     vector<string> devices;
@@ -80,6 +82,13 @@ public:
     {
         device = device_;
         connect();
+    }
+    
+    void setup(const std::string& host, int port){
+        if ( socket.connect(host.c_str(), port) ) {
+            urg.setConnection(&socket);
+            urg.connect(host.c_str(), port);
+        }
     }
     
     void update()
@@ -176,6 +185,11 @@ void ofxUrgDevice::setup()
 void ofxUrgDevice::setup(const string& device)
 {
     pImpl->setup(device);
+}
+
+void ofxUrgDevice::setup(const std::string& host, int port)
+{
+    pImpl->setup(host, port);
 }
 
 void ofxUrgDevice::update()
