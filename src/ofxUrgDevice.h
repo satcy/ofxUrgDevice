@@ -7,11 +7,14 @@ using std::vector;
 class ofxUrgDevice
 {
 public:
+    static const string DEFAULT_HOST;
+    static const int DEFAULT_PORT = 10940;
     ofxUrgDevice();
     ~ofxUrgDevice();
     
     void setup();
     void setup(const std::string& device);
+    void setup(const std::string& host, int port);
     void update();
     void draw(float x, float y) const;
     void drawCoordinate(float x, float y) const;
@@ -34,3 +37,5 @@ private:
     Impl* pImpl;
     
 };
+
+const ofxUrgDevice::DEFAULT_HOST = "192.168.0.10";
