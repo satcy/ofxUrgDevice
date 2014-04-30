@@ -7,7 +7,10 @@ using std::vector;
 class ofxUrgDevice
 {
 public:
-    static const string DEFAULT_HOST;
+    static const string& DEFAULT_HOST(void){
+        static const string str = "192.168.0.10";
+        return str;
+    }
     static const int DEFAULT_PORT = 10940;
     ofxUrgDevice();
     ~ofxUrgDevice();
